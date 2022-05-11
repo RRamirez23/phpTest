@@ -1,0 +1,25 @@
+// GETS TOURNAMENTS ATTENDED GIVEN THE EMAIL
+
+SELECT tournaments.tournamentDate as 'Tournament Date', games.name as 'Game Played', emails.email 
+FROM emails 
+JOIN emails_tournaments et ON emails.id = et.email_id 
+JOIN tournaments on et.tournament_id = tournaments.id 
+JOIN games on tournaments.gameID = games.id
+WHERE emails.email = "Testemail@notreal.com";
+;
+
+// Gets attendees of a tournament given the date
+
+SELECT tournaments.id as "Tournament ID", tournaments.tournamentDate as "Date Held", games.name as "Game", emails.email as "Participants" 
+FROM tournaments 
+JOIN games on tournaments.gameID = games.id 
+JOIN emails_tournaments et on tournaments.id = et.tournament_id 
+JOIN emails on et.email_id = emails.id 
+where tournaments.tournamentDate = "2022-05-08";
+
+// Gets the next available tournament
+
+SELECT * 
+FROM tournaments 
+WHERE tournamentDate > CURRENT_TIMESTAMP() 
+ORDER BY tournamentDate LIMIT 1;
