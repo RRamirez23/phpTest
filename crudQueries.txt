@@ -32,12 +32,23 @@ JOIN emails_tournaments et on emails.id = et.email_id
 JOIN tournaments on et.tournament_id = tournaments.id
 WHERE tournaments.tournamentDate = "$tournamentDate";
 
-// Returns a randomized list of tournament attendents given the tournament date
+// Returns a randomized list of tournament attendants given the tournament date
 SELECT emails.name as "Name"
 FROM tournaments
 JOIN emails_tournaments et on tournaments.id = et.tournament_id
 JOIN emails on et.email_id = emails.id
 WHERE tournaments.tournamentDate = "$tournamentDate"
 ORDER BY RAND();
+
+//Returns a randomized list of tournament attandents given the tournament date, broken up into an N number of tables.
+
+Select * 
+FROM (SELECT emails.name as "Name"
+      FROM tournaments
+      JOIN emails_tournaments et on tournaments.id = et.tournament_id
+      JOIN emails on et.email_id = emails.id
+      WHERE tournaments.tournamentDate = "$tournamentDate"
+      ORDER BY RAND();)
+WHERE id MOD $N = X+=1; //X should be incremented untill it equals the value of N to account for the number of tables that need to be made, should be written in // php. This whole statement should be written in a for loop that increments x until it is equal to the number of tables desired.
 
 
