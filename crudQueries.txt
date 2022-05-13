@@ -25,6 +25,7 @@ WHERE tournamentDate > CURRENT_TIMESTAMP()
 ORDER BY tournamentDate LIMIT 1;
 
 // Gets number of attendees given a tournament date
+//ready to be added
 
 SELECT count(*) 
 FROM emails
@@ -33,6 +34,7 @@ JOIN tournaments on et.tournament_id = tournaments.id
 WHERE tournaments.tournamentDate = "$tournamentDate";
 
 // Returns a randomized list of tournament attendants given the tournament date
+// ready to be added
 SELECT emails.name as "Name"
 FROM tournaments
 JOIN emails_tournaments et on tournaments.id = et.tournament_id
@@ -41,14 +43,14 @@ WHERE tournaments.tournamentDate = "$tournamentDate"
 ORDER BY RAND();
 
 //Returns a randomized list of tournament attandents given the tournament date, broken up into an N number of tables.
-
+// 
 Select * 
-FROM (SELECT emails.name as "Name"
+FROM (SELECT emails.name as "Name", emails.id
       FROM tournaments
       JOIN emails_tournaments et on tournaments.id = et.tournament_id
       JOIN emails on et.email_id = emails.id
-      WHERE tournaments.tournamentDate = "$tournamentDate"
-      ORDER BY RAND();)
-WHERE id MOD $N = X+=1; //X should be incremented untill it equals the value of N to account for the number of tables that need to be made, should be written in // php. This whole statement should be written in a for loop that increments x until it is equal to the number of tables desired.
+      WHERE tournaments.tournamentDate = "2022-05-08"
+      ORDER BY RAND() ) as tempTable
+WHERE id MOD 2 = $x += 1; //X should be incremented untill it equals the value of N to account for the number of tables that need to be made, should be written in // php. This whole statement should be written in a for loop that increments x until it is equal to the number of tables desired.
 
 

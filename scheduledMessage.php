@@ -114,12 +114,12 @@
 
     function getAttendees($date){
 
-        $sql = 'SELECT tournaments.id as "Tournament ID", tournaments.tournamentDate as "Date Held", games.name as "Game", emails.email as "Participants" 
+        $sql = "SELECT tournaments.id as 'Tournament ID', tournaments.tournamentDate as 'Date Held', games.name as 'Game', emails.email as 'Participants' 
         FROM tournaments 
         JOIN games on tournaments.gameID = games.id 
         JOIN emails_tournaments et on tournaments.id = et.tournament_id 
         JOIN emails on et.email_id = emails.id 
-        where tournaments.tournamentDate = "2022-05-08";';
+        where tournaments.tournamentDate = '$date';";
 
         $result = mysqli_query($GLOBALS['conn'], $sql);
 
@@ -165,6 +165,8 @@
 
     }
     getNextTourney();
+
+    
 
 
 
