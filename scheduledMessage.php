@@ -122,7 +122,7 @@
         where tournaments.tournamentDate = '$date';";
 
         $result = mysqli_query($GLOBALS['conn'], $sql);
-
+       
         $resultCheck = mysqli_num_rows($result);
 
         if($resultCheck > 0){
@@ -165,6 +165,30 @@
 
     }
     getNextTourney();
+
+    function getAttendeesR($date){
+        $sql = "SELECT tournaments.id as 'Tournament ID', tournaments.tournamentDate as 'Date Held', games.name as 'Game', emails.email as 'Participants' 
+            FROM tournaments 
+            JOIN games on tournaments.gameID = games.id 
+            JOIN emails_tournaments et on tournaments.id = et.tournament_id 
+            JOIN emails on et.email_id = emails.id 
+            where tournaments.tournamentDate = '$date'
+            ORDER BY RAND();";
+        
+        $result = mysqli_query($GLOBALS['conn'], $sql);
+        
+        $resultCheck = mysqli_num_rows($result);
+        
+        if($resultCheck > 0){
+        
+            $1 = 0;
+            while($row = mysqli_fetch_assoc($result)){
+                
+            }
+        }
+        
+    
+    }
 
     
 
