@@ -36,6 +36,15 @@
     background: #ddd;
     color: black;
   }
+
+  .subText{
+    text-align: center;
+    font-size: 60px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 38vh;
+    color: white;
+    position: relative;
+  }
   .dayText{
     text-align: center;
     font-size: 120px;

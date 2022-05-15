@@ -31,33 +31,33 @@
 
 
     <?php
-    $dayofWeek = date("w");
+    // $dayofWeek = date("w");
 
 
-    switch($dayofWeek){
-        case 1:
-            echo "<p class='dayText'>Today is Monday</p>";
-            break;
-        case 2:
-            echo "<p class='dayText'>Today is Tuesday</p>";
-            break;
-        case 3:
-            echo "<p class='dayText'>Today is Wednesday</p>";
-            break;
-        case 4:
-            echo "<p class='dayText'>Today is Thursday</p>";
-            break;
-        case 5:
-            echo "<p class='dayText'>Today is Friday</p>";
-            break;
-        case 6:
-            echo "<p class='dayText'>Today is Saturday</p>";
-            break;
-        case 0:
-            echo "<p class='dayText'>Today is Sunday</p>";
-            break;
+    // switch($dayofWeek){
+    //     case 1:
+    //         echo "<p class='dayText'>Today is Monday</p>";
+    //         break;
+    //     case 2:
+    //         echo "<p class='dayText'>Today is Tuesday</p>";
+    //         break;
+    //     case 3:
+    //         echo "<p class='dayText'>Today is Wednesday</p>";
+    //         break;
+    //     case 4:
+    //         echo "<p class='dayText'>Today is Thursday</p>";
+    //         break;
+    //     case 5:
+    //         echo "<p class='dayText'>Today is Friday</p>";
+    //         break;
+    //     case 6:
+    //         echo "<p class='dayText'>Today is Saturday</p>";
+    //         break;
+    //     case 0:
+    //         echo "<p class='dayText'>Today is Sunday</p>";
+    //         break;
 
-    }
+    // }
 
     function getAllEmails(){
         $sql = "SELECT * FROM emails;";
@@ -80,7 +80,7 @@
         }
     }
 
-    getAllEmails();
+//    getAllEmails();
 
     function getTournamentsAttended($email){
 
@@ -110,7 +110,7 @@
 
     }
 
-    getTournamentsAttended("Testemail@notreal.com");
+//    getTournamentsAttended("Testemail@notreal.com");
 
     function getAttendees($date){
 
@@ -139,7 +139,7 @@
 
     }
 
-    getAttendees("2022-05-08");
+//    getAttendees("2022-05-08");
 
     function getNextTourney(){
         $sql = 'SELECT * 
@@ -156,14 +156,18 @@
             $i = 0;
 
             while($row = mysqli_fetch_assoc($result)){
+                
+                echo "<p class ='subText'> Next Tournament</p>";
+                echo "<p class ='dayText'>".date_format(date_create($row["tournamentDate"]), ' l jS \a\t g:ia')."</p></br>";
 
-                echo "<p style='color:white'>".$row["tournamentDate"]."</p></br>";
+
 
             }
 
         }
 
     }
+
     getNextTourney();
 
     function getAttendeesR($date){
@@ -180,15 +184,50 @@
         $resultCheck = mysqli_num_rows($result);
         
         if($resultCheck > 0){
-        
-            $1 = 0;
+
+            $i = 0;
+
             while($row = mysqli_fetch_assoc($result)){
-                
+
+                echo "<p style='color:white'>".json_encode($row)."</p></br>";
+
             }
+
         }
         
     
     }
+
+//    getAttendeesR("2022-05-08");
+
+    function getNumberofAttendees($tournamentDate){
+        $sql = "SELECT count(*) as 'Count'
+        FROM emails
+        JOIN emails_tournaments et on emails.id = et.email_id
+        JOIN tournaments on et.tournament_id = tournaments.id
+        WHERE tournaments.tournamentDate = '$tournamentDate';";
+
+        $result = mysqli_query($GLOBALS['conn'], $sql);
+
+        $resultCheck = mysqli_num_rows($result);
+
+        if($resultCheck > 0){
+
+            $i = 0;
+
+            while($row = mysqli_fetch_assoc($result)){
+
+                echo "<p style='color:white'>".$row["Count"]."</p></br>";
+
+            }
+
+        }
+
+    }
+//    getNumberofAttendees("2022-05-08");
+
+
+    
 
     
 
