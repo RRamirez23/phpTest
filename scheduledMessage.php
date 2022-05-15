@@ -157,8 +157,7 @@
 
             while($row = mysqli_fetch_assoc($result)){
                 
-                echo "<p class ='subText'> Next Tournament</p>";
-                echo "<p class ='dayText'>".date_format(date_create($row["tournamentDate"]), ' l jS \a\t g:ia')."</p></br>";
+                echo "<div class='dayText'> <p class = 'subText'>Next Tournament: </p>".date_format(date_create($row["tournamentDate"]), ' l jS \a\t g:ia')."</div>";
 
 
 
