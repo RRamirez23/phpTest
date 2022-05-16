@@ -23,7 +23,12 @@
     </video>
 
     <div class="content">
-        <h1>Heading</h1>
+        <h1>Sign Up Here!</h1>
+        <form action="includes/signup.inc.php" method="POST">
+            <input type="text" name="email" placeholder="Email">
+            <input type="text" name="username" placeholder="Name">
+            <button type="submit" name="submit">Submit</button>
+        </form>
         <p>Lorem ipsum...</p>
         <!-- Use a button to pause/play the video with JavaScript -->
         <button id="myBtn" onclick="myFunction()">Pause</button>
@@ -212,7 +217,6 @@
 
         if($resultCheck > 0){
 
-            $i = 0;
 
             while($row = mysqli_fetch_assoc($result)){
 
